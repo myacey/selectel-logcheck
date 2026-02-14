@@ -1,0 +1,9 @@
+version: "2"
+
+linters:
+  settings:
+    logcheck:
+      example:
+        path: /logcheck.so
+        description: The description of the linter
+        original-url: github.com/golangci/example-linter
