@@ -1,9 +1,21 @@
 version: "2"
 
 linters:
+  defalt: none
+  enable:
+    - logcheck
+
   settings:
-    logcheck:
-      example:
-        path: /logcheck.so
-        description: The description of the linter
-        original-url: github.com/golangci/example-linter
+    custom:
+      logcheck:
+        path: logcheck.so
+
+        settings:
+          check-lowercase: true
+          check-english: false
+          check-special: false
+          check-sensitive: false
+
+          sensitive-words:
+            - username
+            - email

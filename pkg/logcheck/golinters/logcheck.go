@@ -1,4 +1,4 @@
-package golinters
+package main
 
 import (
 	"github.com/myacey/selectel-logcheck/pkg/logcheck"

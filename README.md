@@ -25,25 +25,27 @@ go get github.com/myacey/selectel-logcheck
 ## Использование в golangci-lint
 Собрать плагин:
 ```sh
-go build -buildmode=plugin -o logcheck.so ./pkg/logcheck/golinters
+go build -buildmode=plugin -o logcheck.so ./cmd/addlint/main.go
 ```
 
 ## Конфиг
 ```yml
 linters:
-  enable:
-    - logcheck
+  settings:
+    logcheck:
+      example:
+        path: /logcheck.so
+        description: The description of the linter
+        original-url: github.com/golangci/example-linter
 
-linters-settings:
-  logcheck:
-    check-lowercase: true
-    check-english: true
-    check-special: true
-    check-sensitive: true
+        check-lowercase: true
+        check-english: true
+        check-special: true
+        check-sensitive: true
 
-    sensitive-words:
-      - username
-      - email
+        sensitive-words:
+          - username
+          - email
 ```
 
 ## Примеры ошибок

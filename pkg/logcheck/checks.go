@@ -2,6 +2,7 @@ package logcheck
 
 import (
 	"go/ast"
+	"log"
 	"slices"
 	"strings"
 	"unicode"
@@ -12,6 +13,8 @@ import (
 
 // isLogFunc checks if the function name is a known logging function.
 func isLogFunc(name string) bool {
+	log.Println("INVALID")
+	log.Println("!!!!!")
 	return slices.Contains(config.LogFuncs, name)
 }
 
