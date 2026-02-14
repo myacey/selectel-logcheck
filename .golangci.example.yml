@@ -1,21 +1,15 @@
 version: "2"
 
 linters:
-  defalt: none
-  enable:
-    - logcheck
-
   settings:
     custom:
       logcheck:
         path: logcheck.so
-
         settings:
           check-lowercase: true
-          check-english: false
-          check-special: false
-          check-sensitive: false
-
+          check-english: true
+          check-special: true
+          check-sensitive: true
           sensitive-words:
             - username
             - email

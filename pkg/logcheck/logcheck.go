@@ -19,10 +19,6 @@ var Analyzer = &analysis.Analyzer{
 
 var config = defaultConfig
 
-func init() {
-	loadConfig()
-}
-
 // run inspects the AST of every file in the package.
 func run(pass *analysis.Pass) (interface{}, error) {
 	for _, file := range pass.Files {

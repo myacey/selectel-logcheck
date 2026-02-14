@@ -1,8 +1,6 @@
 package main
 
 import (
-	"log"
-
 	"github.com/myacey/selectel-logcheck/pkg/logcheck"
 
 	"golang.org/x/tools/go/analysis/singlechecker"
@@ -10,7 +8,4 @@ import (
 
 func main() {
 	singlechecker.Main(logcheck.Analyzer)
-
-	log.Println("INVALID")
-	log.Println("!!!!!")
 }

@@ -17,36 +17,65 @@
 - log/slog
 - go.uber.org/zap
 
-## Установка
+## Установка как Go-анализатора
+```go
+go install github.com/myacey/selectel-logcheck/cmd/addlint@latest
+```
+### Запуск:
 ```sh
-go get github.com/myacey/selectel-logcheck
+addlint ./...
 ```
 
 ## Использование в golangci-lint
-Собрать плагин:
+### 1. Скачать исходники golangci-lint
 ```sh
-go build -buildmode=plugin -o logcheck.so ./cmd/addlint/main.go
+git clone https://github.com/golangci/golangci-lint
+cd golangci-lint
 ```
 
-## Конфиг
+### 2. Собрать бинарник
+```sh
+make build
+```
+Готовый файл:
+```sh
+./build/golangci-lint
+```
+
+### 3. Собрать плагин
+В проекте selectel-logcheck:
+```
+go build -buildmode=plugin -o logcheck.so ./pkg/logcheck/golinters
+```
+
+### 4. Настроить `golangci.yml`
 ```yml
+version: "2"
+
 linters:
+  enable:
+    - logcheck
+
   settings:
-    logcheck:
-      example:
-        path: /logcheck.so
-        description: The description of the linter
-        original-url: github.com/golangci/example-linter
-
-        check-lowercase: true
-        check-english: true
-        check-special: true
-        check-sensitive: true
-
-        sensitive-words:
-          - username
-          - email
+    custom:
+      logcheck:
+        path: ./logcheck.so
+        settings:
+          check-lowercase: true
+          check-english: true
+          check-special: true
+          check-sensitive: true
+          sensitive-words:
+            - username
+            - email
 ```
+
+### 5. Запускать кастомный golangci-lint
+```sh
+/path/to/golangci-lint/build/golangci-lint run ./...
+```
+> [!WARN]
+> Не глобальный из `$PATH`.
 
 ## Примеры ошибок
 - `log.Info("Starting server")` -> `log message should start with lowercase letter`

@@ -1,15 +1,18 @@
 package logcheck
 
-import "strings"
+import (
+	"log"
+	"strings"
+)
 
 type Config struct {
-	CheckLowercase bool
-	CheckEnglish   bool
-	CheckSpecial   bool
-	CheckSensitive bool
+	CheckLowercase bool `mapstructure:"check-lowercase"`
+	CheckEnglish   bool `mapstructure:"check-english"`
+	CheckSpecial   bool `mapstructure:"check-special"`
+	CheckSensitive bool `mapstructure:"check-sensitive"`
 
 	LogFuncs       []string
-	SensitiveWords []string
+	SensitiveWords []string `mapstructure:"sensitive-words"`
 }
 
 var defaultConfig = Config{
@@ -41,19 +44,17 @@ var defaultConfig = Config{
 	},
 }
 
-func loadConfig() {
-	Analyzer.Flags.BoolVar(&config.CheckLowercase, "lowercase", true, "check lowercase")
-	Analyzer.Flags.BoolVar(&config.CheckEnglish, "english", true, "check english")
-	Analyzer.Flags.BoolVar(&config.CheckSpecial, "special", true, "check special chars")
-	Analyzer.Flags.BoolVar(&config.CheckSensitive, "sensitive", true, "check sensitive data")
+func ApplyConfig(cfg Config) {
+	config.CheckLowercase = cfg.CheckLowercase
+	config.CheckEnglish = cfg.CheckEnglish
+	config.CheckSpecial = cfg.CheckSpecial
+	config.CheckSensitive = cfg.CheckSensitive
 
-	additionalSensitiveWords := []string{}
-	Analyzer.Flags.Var(
-		(*stringSlice)(&additionalSensitiveWords),
-		"sensitive-words",
-		"additional sensitive words",
-	)
-	config.SensitiveWords = append(config.SensitiveWords, additionalSensitiveWords...)
+	if len(cfg.SensitiveWords) > 0 {
+		config.SensitiveWords = append(config.SensitiveWords, cfg.SensitiveWords...)
+	}
+
+	log.Printf("CONFIG: %+v", cfg)
 }
 
 type stringSlice []string
