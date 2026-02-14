@@ -43,7 +43,7 @@ make build
 ```
 
 ### 3. Собрать плагин
-В проекте selectel-logcheck:
+В проекте `selectel-logcheck`:
 ```
 go build -buildmode=plugin -o logcheck.so ./pkg/logcheck/golinters
 ```
@@ -70,11 +70,11 @@ linters:
             - email
 ```
 
-### 5. Запускать кастомный golangci-lint
+### 5. Запускать кастомный `golangci-lint`
 ```sh
 /path/to/golangci-lint/build/golangci-lint run ./...
 ```
-> [!WARN]
+> [!WARNING]
 > Не глобальный из `$PATH`.
 
 ## Примеры ошибок
