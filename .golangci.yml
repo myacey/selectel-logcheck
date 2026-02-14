@@ -1,0 +1,9 @@
+version: "2"
+
+linters:
+  enable:
+    - logcheck
+
+linters-settings:
+  logcheck:
+    path: ./pkg/logcheck/golinters
