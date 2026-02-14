@@ -61,7 +61,7 @@ linters-settings:
 - удаление недопустимых спецсимволов и эмодзи  
 
 ### Пример
-> [!EXAMPLE]
+> [!NOTE]
 >  До:
 >  ```go
 >  logger.Info("Starting server")
@@ -71,7 +71,7 @@ linters-settings:
 >  logger.Info("starting server")
 >  ```
 
-> [!EXAMPLE]
+> [!NOTE]
 >  До:
 >  ```go
 >  logger.Info("!!!starting server!!!")
